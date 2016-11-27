@@ -1,11 +1,12 @@
 # Buck Adaptors
 
 This repository contains a adaptors to various libraries written in C++ for
-portability.  Folders in this repository are submodule backed and install any
-of the adaptors included in this repository with the following
+portability.  Folders in this repository are submodule backed and therefore
+the recommended way to install any of these modules is with git submodules
 
 ```shell
 git submodule add <remote> <name of library>
+git submodule update --init --recursive
 ```
 And then add the relevant repository to the `.buckconfig` for your project
 
@@ -13,6 +14,10 @@ And then add the relevant repository to the `.buckconfig` for your project
 [repositories]
     <name of library> = <path of submodule>
 ```
+
+See [this example project](https://github.com/aary/sharp-example) for an
+example of how to use buck with buck-backed git submodules containing library
+code.
 
 ### Motivation
 
