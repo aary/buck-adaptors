@@ -1,0 +1,32 @@
+def remove_first_two_path_elements(header_map):
+    """
+    Workaround to the first argument in subdir_glob not accepting a pattern.
+    Does the dirty work that subdir_glob would have been able to do with
+    patterns manually
+    """
+    map_to_return = {}
+    for key, value in header_map.iteritems():
+        # remove the first two path elements in the string
+        new_key = "/".join(key.strip("/").split('/')[2:])
+        map_to_return[new_key] = value
+    return map_to_return
+
+cxx_library(
+    name = "boost",
+    header_namespace = "",
+
+    # No sources will be included because boost has deprecated most of the
+    # source files that it had earlier.  It is almost exlusively a header only
+    # module now.  yay.
+    #
+    # srcs = glob(["**/*.cpp"]),
+    exported_headers = remove_first_two_path_elements(subdir_glob([
+        ("boost/libs", "**/*.hpp"),
+        ("boost/libs", "**/*.ipp"),
+        ("boost/libs", "**/*.h"),
+    ])),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
