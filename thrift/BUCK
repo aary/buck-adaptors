@@ -1,0 +1,84 @@
+cxx_library(
+    name = "thrift",
+
+    # set up a depedency on boost
+    deps = [
+        "//boost:boost"
+    ],
+
+    # No header namespace because the files will be imported the right way
+    header_namespace = "",
+
+    # The sources to be compiled for this
+    srcs = [
+        "thrift/lib/cpp/src/thrift/TApplicationException.cpp",
+        "thrift/lib/cpp/src/thrift/TOutput.cpp",
+        "thrift/lib/cpp/src/thrift/async/TAsyncChannel.cpp",
+        "thrift/lib/cpp/src/thrift/async/TConcurrentClientSyncInfo.cpp",
+        "thrift/lib/cpp/src/thrift/concurrency/ThreadManager.cpp",
+        "thrift/lib/cpp/src/thrift/concurrency/TimerManager.cpp",
+        "thrift/lib/cpp/src/thrift/concurrency/Util.cpp",
+        "thrift/lib/cpp/src/thrift/processor/PeekProcessor.cpp",
+        "thrift/lib/cpp/src/thrift/protocol/TBase64Utils.cpp",
+        "thrift/lib/cpp/src/thrift/protocol/TDebugProtocol.cpp",
+        "thrift/lib/cpp/src/thrift/protocol/TJSONProtocol.cpp",
+        "thrift/lib/cpp/src/thrift/protocol/TMultiplexedProtocol.cpp",
+        "thrift/lib/cpp/src/thrift/protocol/TProtocol.cpp",
+        "thrift/lib/cpp/src/thrift/transport/TTransportException.cpp",
+        "thrift/lib/cpp/src/thrift/transport/TFDTransport.cpp",
+        "thrift/lib/cpp/src/thrift/transport/TSimpleFileTransport.cpp",
+        "thrift/lib/cpp/src/thrift/transport/THttpTransport.cpp",
+        "thrift/lib/cpp/src/thrift/transport/THttpClient.cpp",
+        "thrift/lib/cpp/src/thrift/transport/THttpServer.cpp",
+        "thrift/lib/cpp/src/thrift/transport/TSocket.cpp",
+        "thrift/lib/cpp/src/thrift/transport/TSocketPool.cpp",
+        "thrift/lib/cpp/src/thrift/transport/TServerSocket.cpp",
+        "thrift/lib/cpp/src/thrift/transport/TTransportUtils.cpp",
+        "thrift/lib/cpp/src/thrift/transport/TBufferTransports.cpp",
+        "thrift/lib/cpp/src/thrift/server/TConnectedClient.cpp",
+        "thrift/lib/cpp/src/thrift/server/TServerFramework.cpp",
+        "thrift/lib/cpp/src/thrift/server/TSimpleServer.cpp",
+        "thrift/lib/cpp/src/thrift/server/TThreadPoolServer.cpp",
+        "thrift/lib/cpp/src/thrift/server/TThreadedServer.cpp",
+        "thrift/lib/cpp/src/thrift/concurrency/StdThreadFactory.cpp",
+        "thrift/lib/cpp/src/thrift/concurrency/StdMutex.cpp",
+        "thrift/lib/cpp/src/thrift/concurrency/StdMonitor.cpp",
+        "thrift/lib/cpp/src/thrift/concurrency/PosixThreadFactory.cpp",
+        "thrift/lib/cpp/src/thrift/concurrency/Mutex.cpp",
+        "thrift/lib/cpp/src/thrift/concurrency/Monitor.cpp",
+    ],
+
+    # srcs = glob(["thrift/lib/cpp/src/thrift/**/*.cpp"],
+    #     excludes=["thrift/lib/cpp/src/thrift/windows/**/*.cpp",
+    #               "thrift/lib/cpp/src/thrift/qt/**/*.cpp"]),
+
+    # The headers to import, this evaluates to a dictionary like the following
+    #   {
+    #       "thrift/TDispatchProcessor.h" :
+    #           "thrift/lib/cpp/src/thrift/TDispatchProcessor.h"
+    #   }
+    #
+    # Meaning that source files in this library can include the header in the
+    # following format
+    #
+    #   #include <thrift/TDispatchProcessor.h>
+    #
+    # check https://buckbuild.com/function/subdir_glob.html for more details
+    headers = subdir_glob([
+        ("thrift/lib/cpp/src", "**/*"),
+        ("thrift", "**/*"),
+    ]),
+
+    # The headers to export will be the same as the headers above, just export
+    # all the headers in the src folder, just having this would suffice since
+    # "headers" are included in "exported_headers" but just here for clarity
+    exported_headers = subdir_glob([
+        ("thrift/lib/cpp/src", "**/*"),
+        ("thrift", "**/*"),
+    ]),
+
+    # make the exported headers public
+    visibility = [
+        "PUBLIC",
+    ],
+)
