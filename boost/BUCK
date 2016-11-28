@@ -6,9 +6,22 @@ def remove_first_two_path_elements(header_map):
     """
     map_to_return = {}
     for key, value in header_map.iteritems():
-        # remove the first two path elements in the string
-        new_key = "/".join(key.strip("/").split('/')[2:])
-        map_to_return[new_key] = value
+        # remove the path until hit the "include" folder and keep things after
+        # that, for example, convert "something/else/include/folder/header.hpp" 
+        # to "folder/header.hpp"
+        array_of_path_with_include = key.strip("/").split('/')
+        array_of_path_without_include = []
+        for i in range(0, len(array_of_path_with_include)):
+            # if found include then push everything after that to the path
+            if array_of_path_with_include[i] == "include":
+                for j in range(i + 1, len(array_of_path_with_include)):
+                    array_of_path_without_include.append(\
+                        array_of_path_with_include[j])
+                break
+
+        if array_of_path_without_include:
+            new_key = "/".join(array_of_path_without_include)
+            map_to_return[new_key] = value
     return map_to_return
 
 cxx_library(
