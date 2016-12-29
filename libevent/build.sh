@@ -1,5 +1,5 @@
 cd libevent
-git clean -x --force
+git clean --force -x -d
 git reset --hard
 bash autogen.sh
 ./configure --disable-openssl

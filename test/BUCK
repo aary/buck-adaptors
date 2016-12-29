@@ -7,5 +7,7 @@ cxx_test(
         "//boost:boost",
         "//gflags:gflags",
         "//glog:glog",
+        "//libevent:libevent",
+        "//thrift:thrift",
     ],
 )
