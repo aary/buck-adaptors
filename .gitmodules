@@ -2,7 +2,7 @@
 	path = external/boost
 	url = https://github.com/boostorg/boost
 [submodule "external/thrift"]
-	path = external/thrift
+	path = thrift/thrift
 	url = https://git-wip-us.apache.org/repos/asf/thrift.git
 [submodule "libevent/libevent"]
 	path = libevent/libevent
