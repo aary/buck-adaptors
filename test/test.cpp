@@ -1,9 +1,11 @@
 #include <boost/shared_ptr.hpp>
+#include <gtest/gtest.h>
+#include <gflags/gflags.h>
+
 #include <iostream>
 
 using namespace std;
 
-int main() {
-    cout << "Hello World" << endl;
-    return 0;
-}
+DEFINE_string(information, "placeholder", "something informative");
+
+TEST(all, all) { }

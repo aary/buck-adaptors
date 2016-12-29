@@ -1,9 +1,10 @@
-cxx_binary(
+cxx_test(
     name = "test",
     srcs = [
         "test.cpp",
     ],
     deps = [
         "//boost:boost",
+        "//gflags:gflags",
     ],
 )

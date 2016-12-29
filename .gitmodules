@@ -10,3 +10,6 @@
 [submodule "gflags"]
 	path = gflags/gflags
 	url = https://github.com/gflags/gflags
+[submodule "gtest/googletest"]
+	path = gtest/googletest
+	url = https://github.com/google/googletest
