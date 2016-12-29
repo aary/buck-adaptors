@@ -13,3 +13,6 @@
 [submodule "gtest/googletest"]
 	path = gtest/googletest
 	url = https://github.com/google/googletest
+[submodule "glog/glog"]
+	path = glog/glog
+	url = https://github.com/google/glog

@@ -1,0 +1,27 @@
+cxx_library(
+    name = "glog",
+    header_namespace = "",
+    srcs = [
+        "glog/src/demangle.cc",
+        "glog/src/logging.cc",
+        "glog/src/raw_logging.cc",
+        "glog/src/symbolize.cc",
+        "glog/src/utilities.cc",
+        "glog/src/vlog_is_on.cc",
+        "glog/src/signalhandler.cc",
+    ],
+    headers = subdir_glob([
+        ("glog/src", "**/*.h"),
+        ("glog/cmake-build", "**/*.h"),
+    ]),
+    exported_headers = subdir_glob([
+        ("glog/src", "**/*.h"),
+        ("glog/cmake-build", "**/*.h"),
+    ], excludes = [
+        "**/*config*.h"
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)

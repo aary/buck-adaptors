@@ -6,5 +6,6 @@ cxx_test(
     deps = [
         "//boost:boost",
         "//gflags:gflags",
+        "//glog:glog",
     ],
 )

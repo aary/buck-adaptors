@@ -1,7 +1,3 @@
-print subdir_glob([
-    ("gflags/cmake-build/include", "**/*.h"),
-    ("gflags/cmake-build/include/gflags", "*.h"),
-])
 cxx_library(
     name = "gflags",
     header_namespace = "",
@@ -14,6 +10,8 @@ cxx_library(
     exported_headers = subdir_glob([
         ("gflags/cmake-build/include", "**/*.h"),
         ("gflags/cmake-build/include/gflags", "*.h"),
+    ], excludes = [
+        "**/*config*.h",
     ]),
 
     visibility = [
