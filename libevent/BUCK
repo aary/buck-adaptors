@@ -1,0 +1,11 @@
+prebuilt_cxx_library(
+    name = "libevent",
+    lib_dir = "libevent/lib",
+    header_namespace = "",
+    exported_headers = subdir_glob([
+        ("libevent/include", "**/*"),
+    ]),
+    visibility = [
+        "PUBLIC",
+    ],
+)
