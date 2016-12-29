@@ -7,3 +7,6 @@
 [submodule "libevent/libevent"]
 	path = libevent/libevent
 	url = https://github.com/libevent/libevent/
+[submodule "gflags"]
+	path = gflags/gflags
+	url = https://github.com/gflags/gflags

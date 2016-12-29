@@ -1,0 +1,22 @@
+print subdir_glob([
+    ("gflags/cmake-build/include", "**/*.h"),
+    ("gflags/cmake-build/include/gflags", "*.h"),
+])
+cxx_library(
+    name = "gflags",
+    header_namespace = "",
+    srcs = glob(["gflags/src/*.cc"],
+        excludes = ["**/*windows*.cc"]),
+    headers = subdir_glob([
+        ("gflags/cmake-build/include", "**/*.h"),
+        ("gflags/cmake-build/include/gflags", "*.h"),
+    ]),
+    exported_headers = subdir_glob([
+        ("gflags/cmake-build/include", "**/*.h"),
+        ("gflags/cmake-build/include/gflags", "*.h"),
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
