@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <gflags/gflags.h>
 #include <glog/logging.h>
+#include <double-conversion/double-conversion.h>
 
 #include <iostream>
 

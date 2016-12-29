@@ -1,0 +1,17 @@
+cxx_library(
+    name = "double-conversion",
+    header_namespace = "",
+    srcs = glob([
+        "double-conversion/double-conversion/*.cc"
+    ]),
+    headers = subdir_glob([
+        ("double-conversion/double-conversion", "*.h"),
+    ]),
+    exported_headers = subdir_glob([
+        ("double-conversion", "double-conversion/*.h"),
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)

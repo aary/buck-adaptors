@@ -9,5 +9,6 @@ cxx_test(
         "//glog:glog",
         "//libevent:libevent",
         "//thrift:thrift",
+        "//double-conversion:double-conversion",
     ],
 )
