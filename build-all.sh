@@ -9,3 +9,7 @@ cd ..
 cd libevent
 bash build.sh
 cd ..
+
+cd jemalloc
+bash build.sh
+cd ..

@@ -1,0 +1,11 @@
+prebuilt_cxx_library(
+    name = "jemalloc",
+    lib_dir = "jemalloc/lib",
+    header_namespace = "",
+    exported_headers = subdir_glob([
+        ("jemalloc/include", "**/*.h"),
+    ]),
+    visibility = [
+        "PUBLIC",
+    ],
+)

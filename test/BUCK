@@ -10,5 +10,6 @@ cxx_test(
         "//libevent:libevent",
         "//thrift:thrift",
         "//double-conversion:double-conversion",
+        "//jemalloc:jemalloc",
     ],
 )

@@ -12,3 +12,8 @@ cd libevent/libevent
 git clean --force -x -d
 git reset --hard
 cd ../../
+
+cd jemalloc/jemalloc
+git clean --force -x -d
+git reset --hard
+cd ../../
