@@ -12,5 +12,6 @@ cxx_test(
         "//double-conversion:double-conversion",
         "//jemalloc:jemalloc",
         "//snappy:snappy",
+        "//lz4:lz4",
     ],
 )
