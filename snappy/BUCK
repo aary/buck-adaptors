@@ -1,0 +1,29 @@
+cxx_library(
+    name = "snappy",
+    header_namespace = "",
+    srcs = [
+        "snappy/snappy.cc",
+        "snappy/snappy-sinksource.cc",
+        "snappy/snappy-stubs-internal.cc",
+        "snappy/snappy-c.cc",
+    ],
+    headers = subdir_glob([
+        ("snappy", "snappy.h"),
+        ("snappy", "snappy-sinksource.h"),
+        ("snappy", "snappy-stubs-public.h"),
+        ("snappy", "snappy-c.h"),
+        ("snappy", "snappy-internal.h"),
+        ("snappy", "snappy-stubs-internal.h"),
+        ("snappy", "snappy-test.h"),
+    ]),
+    exported_headers = subdir_glob([
+        ("snappy", "snappy.h"),
+        ("snappy", "snappy-sinksource.h"),
+        ("snappy", "snappy-stubs-public.h"),
+        ("snappy", "snappy-c.h"),
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)

@@ -13,3 +13,7 @@ cd ..
 cd jemalloc
 bash build.sh
 cd ..
+
+cd snappy
+bash build.sh
+cd ..

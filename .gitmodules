@@ -22,3 +22,6 @@
 [submodule "jemalloc/jemalloc"]
 	path = jemalloc/jemalloc
 	url = https://github.com/jemalloc/jemalloc
+[submodule "snappy/snappy"]
+	path = snappy/snappy
+	url = https://github.com/google/snappy/

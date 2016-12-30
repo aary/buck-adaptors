@@ -11,5 +11,6 @@ cxx_test(
         "//thrift:thrift",
         "//double-conversion:double-conversion",
         "//jemalloc:jemalloc",
+        "//snappy:snappy",
     ],
 )

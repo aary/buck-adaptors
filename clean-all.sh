@@ -17,3 +17,9 @@ cd jemalloc/jemalloc
 git clean --force -x -d
 git reset --hard
 cd ../../
+
+cd snappy/snappy
+git clean --force -x -d
+git reset --hard
+cd ../../
+
