@@ -1,33 +1,25 @@
-def remove_first_two_path_elements(header_map):
-    """
-    Workaround to the first argument in subdir_glob not accepting a pattern.
-    Does the dirty work that subdir_glob would have been able to do with
-    patterns manually
-    """
-    map_to_return = {}
-    for key, value in header_map.iteritems():
-        # remove the path until hit the "include" folder and keep things after
-        # that, for example, convert "something/else/include/folder/header.hpp" 
-        # to "folder/header.hpp"
-        array_of_path_with_include = key.strip("/").split('/')
-        array_of_path_without_include = []
-        location_include = -1
-        for i in range(0, len(array_of_path_with_include)):
-            # if found include then push everything after that to the path
-            if array_of_path_with_include[i] == "include":
-                location_include = i
+def find_all_public_includes(map_public_private_paths):
+    ret_dict = {}
+    for key in map_public_private_paths:
+        public_path = map_public_private_paths[key]
 
-        # make the new array with everything after the first include
-        for i in range(location_include + 1, len(array_of_path_with_include)):
-            array_of_path_without_include.append(\
-                array_of_path_with_include[i])
+        # reverse the string, find the first occurence of the "include" string
+        # from the back, remove everything after the string and then reverse it
+        # back
+        public_path = public_path[::-1]
+        pos_include = public_path.find("include/"[::-1])
+        if pos_include == -1:
+            continue
 
-        # then join it if it exists, apparently there were some cases where
-        # things were blank
-        if array_of_path_without_include:
-            new_key = "/".join(array_of_path_without_include)
-            map_to_return[new_key] = value
-    return map_to_return
+        # truncate the string to the beginning of the first slash after the
+        # include
+        public_path = public_path[:pos_include]
+        public_path = public_path[::-1]
+
+        # add the key value pair to the dictionary
+        ret_dict[public_path.strip("/")] = map_public_private_paths[key]
+
+    return ret_dict
 
 cxx_library(
     name = "boost",
@@ -38,7 +30,7 @@ cxx_library(
     # module now.  yay.
     #
     # srcs = glob(["**/*.cpp"]),
-    exported_headers = remove_first_two_path_elements(subdir_glob([
+    exported_headers = find_all_public_includes(subdir_glob([
         ("boost/libs", "**/*.hpp"),
         ("boost/libs", "**/*.ipp"),
         ("boost/libs", "**/*.h"),
