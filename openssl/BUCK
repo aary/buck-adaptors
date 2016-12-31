@@ -1,0 +1,30 @@
+prebuilt_cxx_library_group(
+    name = "openssl",
+    static_link = [
+        '$(lib 0)',
+        '$(lib 1)',
+    ],
+    static_libs = [
+        "openssl/lib/libcrypto.a",
+        "openssl/lib/libssl.a",
+    ],
+    exported_deps = [
+        "//openssl:openssl-headers",
+    ],
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "openssl-headers",
+    header_namespace = "",
+    exported_headers = subdir_glob([
+        ("openssl/include", "**/*.h"),
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)

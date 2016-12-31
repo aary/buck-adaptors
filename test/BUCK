@@ -13,5 +13,6 @@ cxx_test(
         "//jemalloc:jemalloc",
         "//snappy:snappy",
         "//lz4:lz4",
+        "//openssl:openssl",
     ],
 )

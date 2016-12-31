@@ -6,6 +6,7 @@
 #include <jemalloc/jemalloc.h>
 #include <snappy.h>
 #include <lz4.h>
+#include <openssl/ssl.h>
 
 #include <iostream>
 #include <string>
@@ -15,6 +16,7 @@ using namespace std;
 DEFINE_string(information, "placeholder", "something informative");
 
 TEST(all, all) {
+    OpenSSL_add_ssl_algorithms();
     auto to_compress = string{"aaaaaaaa"};
     auto compressed = to_compress;
     snappy::Compress(to_compress.data(), to_compress.size(), &compressed);
