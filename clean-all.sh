@@ -23,3 +23,7 @@ git clean --force -x -d
 git reset --hard
 cd ../../
 
+cd thrift/thrift
+git clean --force -x -d
+git reset --hard
+cd ../../

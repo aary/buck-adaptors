@@ -69,6 +69,9 @@ cxx_library(
     headers = subdir_glob([
         ("thrift/lib/cpp/src", "**/*"),
         ("thrift", "**/*"),
+        ("thrift/cmake-build", "**/*.h"),
+    ], excludes = [
+        "thrift/cmake-build/compiler/cpp/thrift/version.h",
     ]),
 
     # The headers to export will be the same as the headers above, just export

@@ -17,3 +17,7 @@ cd ..
 cd snappy
 bash build.sh
 cd ..
+
+cd thrift
+bash build.sh
+cd ..
