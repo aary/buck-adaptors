@@ -25,3 +25,11 @@ cd ..
 cd boost
 bash build.sh
 cd ..
+
+cd zlib
+bash build.sh
+cd ..
+
+cd bzip2
+bash build.sh
+cd ..

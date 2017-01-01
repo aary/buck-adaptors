@@ -27,3 +27,8 @@ cd thrift/thrift
 git clean --force -x -d
 git reset --hard
 cd ../../
+
+cd zlib/zlib
+git clean --force -x -d
+git reset --hard
+cd ../../
