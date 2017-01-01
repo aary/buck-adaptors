@@ -8,7 +8,7 @@ cxx_library(
         ("bzip2", "*.h"),
     ]),
     exported_headers = subdir_glob([
-        ("bzip2", "bzip2.h"),
+        ("bzip2", "bzlib.h"),
     ]),
 
     visibility = [
