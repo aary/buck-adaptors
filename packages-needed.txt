@@ -1,0 +1,5 @@
+cmake
+autoconf
+automake
+autoconf-archive
+libtool

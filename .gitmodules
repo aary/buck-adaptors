@@ -28,3 +28,6 @@
 [submodule "lz4/lz4"]
 	path = lz4/lz4
 	url = https://github.com/lz4/lz4/
+[submodule "zlib/zlib"]
+	path = zlib/zlib
+	url = https://github.com/madler/zlib
