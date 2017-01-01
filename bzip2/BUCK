@@ -1,0 +1,17 @@
+cxx_library(    
+    name = "bzip2",
+    header_namespace = "",
+    srcs = glob([
+        "bzip2/*.c",
+    ]),
+    headers = subdir_glob([
+        ("bzip2", "*.h"),
+    ]),
+    exported_headers = subdir_glob([
+        ("bzip2", "bzip2.h"),
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
