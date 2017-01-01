@@ -170,6 +170,8 @@ cxx_library(
     header_namespace = "",
     deps = [
         "//boost:boost_headers",
+        "//zlib:zlib",
+        "//bzip2:bzip2",
     ],
     srcs = glob([
         "boost/libs/iostreams/src/**/*.cpp",
