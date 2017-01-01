@@ -21,3 +21,7 @@ cd ..
 cd thrift
 bash build.sh
 cd ..
+
+cd boost
+bash build.sh
+cd ..
