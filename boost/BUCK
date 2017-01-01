@@ -1,29 +1,104 @@
-def find_all_public_includes(map_public_private_paths):
-    ret_dict = {}
-    for key in map_public_private_paths:
-        public_path = map_public_private_paths[key]
+# def find_all_public_includes(map_public_private_paths):
+#     ret_dict = {}
+#     for key in map_public_private_paths:
+#         public_path = map_public_private_paths[key]
+#
+#         # reverse the string, find the first occurence of the "include" string
+#         # from the back, remove everything after the string and then reverse
+#         # it back
+#         public_path = public_path[::-1]
+#         pos_include = public_path.find("include/"[::-1])
+#         if pos_include == -1:
+#             continue
+#
+#         # truncate the string to the beginning of the first slash after the
+#         # include
+#         public_path = public_path[:pos_include]
+#         public_path = public_path[::-1]
+#
+#         # add the key value pair to the dictionary
+#         ret_dict[public_path.strip("/")] = map_public_private_paths[key]
+#
+#     return ret_dict
+def find_all_public_includes(header_map):
+    """
+    Workaround to the first argument in subdir_glob not accepting a pattern.
+    Does the dirty work that subdir_glob would have been able to do with
+    patterns manually
+    """
+    map_to_return = {}
+    for key, value in header_map.iteritems():
+        # remove the path until hit the "include" folder and keep things after
+        # that, for example, convert "something/else/include/folder/header.hpp"
+        # to "folder/header.hpp"
+        array_of_path_with_include = key.strip("/").split('/')
+        array_of_path_without_include = []
+        for i in range(0, len(array_of_path_with_include)):
+            # if found include then push everything after that to the path
+            if array_of_path_with_include[i] == "include":
+                for j in range(i + 1, len(array_of_path_with_include)):
+                    array_of_path_without_include.append(\
+                        array_of_path_with_include[j])
+                break
 
-        # reverse the string, find the first occurence of the "include" string
-        # from the back, remove everything after the string and then reverse it
-        # back
-        public_path = public_path[::-1]
-        pos_include = public_path.find("include/"[::-1])
-        if pos_include == -1:
-            continue
+        if array_of_path_without_include:
+            new_key = "/".join(array_of_path_without_include)
+            map_to_return[new_key] = value
+    return map_to_return
 
-        # truncate the string to the beginning of the first slash after the
-        # include
-        public_path = public_path[:pos_include]
-        public_path = public_path[::-1]
-
-        # add the key value pair to the dictionary
-        ret_dict[public_path.strip("/")] = map_public_private_paths[key]
-
-    return ret_dict
 
 cxx_library(
     name = "boost",
+    deps = [
+        "//boost:boost_headers",
+        "//boost:chrono",
+        "//boost:context",
+        "//boost:filesystem",
+        "//boost:iostreams",
+        "//boost:program-options",
+        "//boost:python",
+        "//boost:regex",
+        "//boost:serialization",
+        "//boost:signals",
+        "//boost:system",
+        "//boost:thread",
+        "//boost:timer",
+        "//boost:wave",
+    ],
+    exported_deps = [
+        "//boost:boost_headers",
+        "//boost:chrono",
+        "//boost:context",
+        "//boost:filesystem",
+        "//boost:iostreams",
+        "//boost:program-options",
+        "//boost:python",
+        "//boost:regex",
+        "//boost:serialization",
+        "//boost:signals",
+        "//boost:system",
+        "//boost:thread",
+        "//boost:timer",
+        "//boost:wave",
+    ],
+
+    tests = [
+        "//boost:boost-test",
+    ],
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "boost_headers",
     header_namespace = "",
+
+    # Preprocessor flags to use to make sure headers are OK
+    exported_preprocessor_flags = [
+        "-DBOOST_NO_CXX17_STD_INVOKE",
+    ],
 
     # No sources will be included because boost has deprecated most of the
     # source files that it had earlier.  It is almost exlusively a header only
@@ -40,3 +115,276 @@ cxx_library(
         "PUBLIC",
     ],
 )
+
+cxx_library(
+    name = "chrono",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/chrono/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "context",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/context/src/**/*.cpp",
+    ], excludes = [
+        "boost/libs/context/src/windows/*.cpp",
+        "boost/libs/context/src/unsupported.cpp",
+        "boost/libs/context/src/untested.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "filesystem",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/filesystem/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "iostreams",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/iostreams/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "locale",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/locale/src/**/*.cpp",
+    ], excludes = [
+        "boost/libs/locale/src/win32/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "log",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    headers = subdir_glob([
+        ("boost/libs/log/src", "**/*.hpp"),
+    ]),
+    srcs = glob([
+        "boost/libs/log/src/**/*.cpp",
+    ], excludes = [
+        "boost/libs/log/src/windows/**/*.cpp",
+        "boost/libs/log/src/dump_avx2.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "mpi",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    headers = subdir_glob([
+        ("boost/libs/mpi/src", "**/*.hpp"),
+    ]),
+    srcs = glob([
+        "boost/libs/mpi/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+
+cxx_library(
+    name = "program-options",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/program_options/src/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "python",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    headers = subdir_glob([
+        ("python2.7", "**/*.h"),
+    ]),
+    srcs = glob([
+        "boost/libs/python/src/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "regex",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/regex/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "serialization",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/serialization/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "signals",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/signals/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "system",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/system/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+
+cxx_library(
+    name = "thread",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/thread/src/**/*.cpp",
+    ], excludes = [
+        "boost/libs/thread/src/win32/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "timer",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/timer/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_library(
+    name = "wave",
+    header_namespace = "",
+    deps = [
+        "//boost:boost_headers",
+    ],
+    srcs = glob([
+        "boost/libs/wave/src/**/*.cpp",
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_test(
+    name = "boost-test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [
+        "//boost:boost",
+    ],
+)
+
