@@ -1,0 +1,25 @@
+cxx_library(
+    name = "sharp",
+    deps = [
+        "sharp//LessPtr:LessPtr",
+        "sharp//LockedData:LockedData",
+        "sharp//OrderedContainer:OrderedContainer",
+        "sharp//Range:Range",
+        "sharp//Tags:Tags",
+        "sharp//Traits:Traits",
+    ],
+
+    tests = [
+        "//sharp:sharp_test",
+    ],
+)
+
+cxx_test(
+    name = "sharp_test",
+    srcs = [    
+        "test.cpp",
+    ],
+    deps = [
+        "//sharp:sharp",
+    ],
+)

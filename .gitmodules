@@ -31,3 +31,6 @@
 [submodule "zlib/zlib"]
 	path = zlib/zlib
 	url = https://github.com/madler/zlib
+[submodule "sharp/sharp"]
+	path = sharp/sharp
+	url = https://github.com/aary/sharp
