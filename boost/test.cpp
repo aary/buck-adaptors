@@ -196,4 +196,4 @@
 #include <boost/heap/skew_heap.hpp>
 #include <gtest/gtest.h>
 
-TEST(temp, temp) {}
+TEST(boost, boost) {}
