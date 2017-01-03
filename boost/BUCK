@@ -57,7 +57,7 @@ cxx_library(
         "//boost:filesystem",
         "//boost:iostreams",
         "//boost:log",
-        "//boost:program-options",
+        "//boost:program_options",
         "//boost:python",
         "//boost:regex",
         "//boost:serialization",
@@ -69,7 +69,7 @@ cxx_library(
     ],
 
     tests = [
-        "//boost:boost-test",
+        "//boost:boost_test",
     ],
 
     visibility = [
@@ -226,7 +226,7 @@ cxx_library(
 
 
 cxx_library(
-    name = "program-options",
+    name = "program_options",
     header_namespace = "",
     deps = [
         "//boost:boost_headers",
@@ -367,7 +367,7 @@ cxx_library(
 )
 
 cxx_test(
-    name = "boost-test",
+    name = "boost_test",
     srcs = [
         "test.cpp",
     ],
