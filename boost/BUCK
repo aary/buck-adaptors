@@ -49,22 +49,6 @@ def find_all_public_includes(header_map):
 
 cxx_library(
     name = "boost",
-    deps = [
-        "//boost:boost_headers",
-        "//boost:chrono",
-        "//boost:context",
-        "//boost:filesystem",
-        "//boost:iostreams",
-        "//boost:program-options",
-        "//boost:python",
-        "//boost:regex",
-        "//boost:serialization",
-        "//boost:signals",
-        "//boost:system",
-        "//boost:thread",
-        "//boost:timer",
-        "//boost:wave",
-    ],
 
     exported_deps = [
         "//boost:boost_headers",
@@ -72,6 +56,7 @@ cxx_library(
         "//boost:context",
         "//boost:filesystem",
         "//boost:iostreams",
+        "//boost:log",
         "//boost:program-options",
         "//boost:python",
         "//boost:regex",
