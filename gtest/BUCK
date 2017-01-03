@@ -8,8 +8,13 @@ cxx_library(
     # "gtest/gtest/gtest.h"
     header_namespace = "",
 
-    srcs = glob(['googletest/googletest/src/*.cc'],
-      excludes=['googletest/googletest/src/gtest-all.cc']),
+    srcs = glob([
+        "googletest/googletest/src/*.cc",
+        "googletest/googlemock/src/*.cc",
+    ], excludes = [
+        "googletest/googletest/src/gtest-all.cc",
+        "googletest/googlemock/src/gmock-all.cc",
+    ]),
 
     # Not all compilers support <tr1/tuple>, so have gtest use it's
     # internal implementation.
@@ -31,6 +36,7 @@ cxx_library(
     # check https://buckbuild.com/function/subdir_glob.html for more details
     headers = subdir_glob([
         ("googletest/googletest", "**/*.h"),
+        ("googletest/googlemock/include", "**/*.h"),
     ]),
 
     # the headers to export to the outside world for including, these also go
@@ -42,6 +48,7 @@ cxx_library(
     exported_headers = subdir_glob([
         ('googletest/googletest/src', '*.h'),
         ('googletest/googletest/include', '**/*.h'),
+        ('googletest/googlemock/include', '**/*.h'),
     ]),
 
     # make the exported_headers publicly available
