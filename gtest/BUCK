@@ -51,8 +51,22 @@ cxx_library(
         ('googletest/googlemock/include', '**/*.h'),
     ]),
 
+    tests = [
+        "//gtest:test",
+    ],
+
     # make the exported_headers publicly available
     visibility = [
       'PUBLIC',
+    ],
+)
+
+cxx_test(
+    name = "test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [
+        "//gtest:gtest",
     ],
 )
