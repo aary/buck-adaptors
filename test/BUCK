@@ -14,5 +14,6 @@ cxx_test(
         "//snappy:snappy",
         "//lz4:lz4",
         "//openssl:openssl",
+        "//fatal:fatal",
     ],
 )
