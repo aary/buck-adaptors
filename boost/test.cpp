@@ -160,7 +160,6 @@
 #include <boost/swap.hpp>
 #include <boost/type.hpp>
 #include <boost/utility/addressof.hpp>
-#include <boost/utility/empty_deleter.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <boost/utility/explicit_operator_bool.hpp>
 #include <boost/utility/swap.hpp>
