@@ -1,0 +1,28 @@
+cxx_library(
+    name = "fatal",
+    header_namespace = "",
+    headers = subdir_glob([
+        ("fatal/fatal", "**/*.h"),
+    ]),
+    exported_headers = subdir_glob([
+        ("fatal", "**/*.h"),
+    ]),
+
+    tests = [
+        ":test",
+    ],
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_test(
+    name = "test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [    
+        ":fatal",
+    ],
+)

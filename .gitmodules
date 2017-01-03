@@ -31,3 +31,6 @@
 [submodule "zlib/zlib"]
 	path = zlib/zlib
 	url = https://github.com/madler/zlib
+[submodule "fatal/fatal"]
+	path = fatal/fatal
+	url = https://github.com/facebook/fatal
