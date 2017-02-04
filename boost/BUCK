@@ -59,11 +59,6 @@ cxx_library(
     name = "boost_headers",
     header_namespace = "",
 
-    # Preprocessor flags to use to make sure headers are OK
-    exported_preprocessor_flags = [
-        # "-DBOOST_NO_CXX17_STD_INVOKE",
-    ],
-
     # exported_headers = find_all_public_includes(subdir_glob([
     #     ("boost/libs", "**/*.hpp"),
     #     ("boost/libs", "**/*.ipp"),
