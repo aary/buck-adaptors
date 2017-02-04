@@ -17,3 +17,14 @@ cxx_test(
         "//fatal:fatal",
     ],
 )
+
+cxx_binary(
+    name = "po",
+    srcs = [
+        "po.cpp",
+    ],
+
+    deps = [
+        "//boost:boost",
+    ],
+)
