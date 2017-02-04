@@ -34,3 +34,6 @@
 [submodule "fatal/fatal"]
 	path = fatal/fatal
 	url = https://github.com/facebook/fatal
+[submodule "fmt/fmt"]
+	path = fmt/fmt
+	url = https://github.com/fmtlib/fmt

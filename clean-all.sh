@@ -32,3 +32,8 @@ cd zlib/zlib
 git clean --force -x -d
 git reset --hard
 cd ../../
+
+cd fmt/fmt
+git clean --force -x -d
+git reset --hard
+cd ../../

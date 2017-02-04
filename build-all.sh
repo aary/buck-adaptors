@@ -33,3 +33,7 @@ cd ..
 cd bzip2
 bash build.sh
 cd ..
+
+cd fmt/fmt
+bash build.sh
+cd ..
