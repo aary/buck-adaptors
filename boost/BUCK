@@ -47,7 +47,7 @@ cxx_library(
     ],
 
     tests = [
-        "//boost:boost_test",
+        "//boost:test",
     ],
 
     visibility = [
@@ -61,19 +61,19 @@ cxx_library(
 
     # Preprocessor flags to use to make sure headers are OK
     exported_preprocessor_flags = [
-        "-DBOOST_NO_CXX17_STD_INVOKE",
+        # "-DBOOST_NO_CXX17_STD_INVOKE",
     ],
 
-    # No sources will be included because boost has deprecated most of the
-    # source files that it had earlier.  It is almost exlusively a header only
-    # module now.  yay.
-    #
-    # srcs = glob(["**/*.cpp"]),
-    exported_headers = find_all_public_includes(subdir_glob([
-        ("boost/libs", "**/*.hpp"),
-        ("boost/libs", "**/*.ipp"),
-        ("boost/libs", "**/*.h"),
-    ])),
+    # exported_headers = find_all_public_includes(subdir_glob([
+    #     ("boost/libs", "**/*.hpp"),
+    #     ("boost/libs", "**/*.ipp"),
+    #     ("boost/libs", "**/*.h"),
+    # ])),
+    exported_headers = subdir_glob([
+        ("boost", "**/*.hpp"),
+        ("boost", "**/*.h"),
+        ("boost", "**/*.ipp"),
+    ]),
 
     visibility = [
         "PUBLIC",
@@ -345,7 +345,7 @@ cxx_library(
 )
 
 cxx_test(
-    name = "boost_test",
+    name = "test",
     srcs = [
         "test.cpp",
     ],
