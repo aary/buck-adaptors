@@ -1,0 +1,21 @@
+prebuilt_cxx_library(
+    name = "fmt",
+    lib_dir = "fmt/build/fmt",
+    header_namespace = "",
+    exported_headers = subdir_glob([
+        ("fmt", "**/*.h"),
+    ]),
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_test(
+    name = "test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [    
+        ":fmt",
+    ],
+)
