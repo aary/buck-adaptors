@@ -14,7 +14,21 @@ cxx_library(
         "**/*config*.h",
     ]),
 
+    tests = [
+        "//gflags:test",
+    ],
+
     visibility = [
         "PUBLIC",
+    ],
+)
+
+cxx_test(
+    name = "test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [
+        "//gflags:gflags",
     ],
 )
