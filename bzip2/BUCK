@@ -4,6 +4,9 @@ cxx_library(
     srcs = glob([
         "bzip2/*.c",
     ]),
+    compiler_flags = [
+        "-w",
+    ],
     headers = subdir_glob([
         ("bzip2", "*.h"),
     ]),
@@ -11,7 +14,21 @@ cxx_library(
         ("bzip2", "bzlib.h"),
     ]),
 
+    tests = [
+        "//bzip2:test",
+    ],
+
     visibility = [
         "PUBLIC",
+    ],
+)
+
+cxx_test(
+    name = "test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [
+        "//bzip2:bzip2",
     ],
 )
