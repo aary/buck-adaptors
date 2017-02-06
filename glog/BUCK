@@ -21,7 +21,21 @@ cxx_library(
         "**/*config*.h"
     ]),
 
+    tests = [
+        "//glog:test",
+    ],
+
     visibility = [
         "PUBLIC",
+    ],
+)
+
+cxx_test(
+    name = "test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [
+        "//glog:glog",
     ],
 )
