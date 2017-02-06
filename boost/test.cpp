@@ -195,4 +195,7 @@
 #include <boost/heap/skew_heap.hpp>
 #include <gtest/gtest.h>
 
-TEST(boost, boost) {}
+TEST(boost, boost) {
+    auto int_ptr = boost::make_shared<int>(1);
+    EXPECT_EQ(*int_ptr, 1);
+}
