@@ -1,6 +1,10 @@
+# Top level boost library that links together all the different libraries that
+# boost offers
 cxx_library(
     name = "boost",
 
+    # Compile all the libraries that are not only header files so rthat they
+    # can be included in the library when this is included as a dependency
     exported_deps = [
         "//boost:boost_headers",
         "//boost:chrono",
@@ -28,6 +32,8 @@ cxx_library(
     ],
 )
 
+# Use this if you only want to include the header only boost libraries and do
+# not want to compile everything else
 cxx_library(
     name = "boost_headers",
     header_namespace = "",
