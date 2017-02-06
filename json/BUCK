@@ -1,0 +1,11 @@
+cxx_library(
+    name = "json",
+    header_namespace = "json",
+    exported_headers = subdir_glob([
+        ("json", "**/*.hpp"),
+    ]),
+
+    visibility = [
+        "PUBLIC",
+    ],
+)
