@@ -15,6 +15,7 @@ cxx_test(
         "//lz4:lz4",
         "//openssl:openssl",
         "//fatal:fatal",
+        "//json:json",
     ],
 )
 

@@ -8,6 +8,7 @@
 #include <lz4.h>
 #include <openssl/ssl.h>
 #include <fatal/string/string_view.h>
+#include <json/json.hpp>
 
 #include <iostream>
 #include <string>
@@ -29,4 +30,12 @@ TEST(all, all) {
     void* memory = malloc(1000);
     EXPECT_TRUE(static_cast<bool>(memory));
     LOG(INFO) << "success";
+
+    using json = nlohmann::json;
+    auto obj = R"(
+        {
+            "happy" : true,
+            "pi" : 3.141
+        }
+    )"_json;
 }
