@@ -15,7 +15,7 @@ cxx_library(
     ]),
 
     tests = [
-        "//bzip2:test",
+        ":test",
     ],
 
     visibility = [

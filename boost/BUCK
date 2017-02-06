@@ -24,7 +24,7 @@ cxx_library(
     ],
 
     tests = [
-        "//boost:test",
+        ":test",
     ],
 
     visibility = [

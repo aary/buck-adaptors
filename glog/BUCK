@@ -22,7 +22,7 @@ cxx_library(
     ]),
 
     tests = [
-        "//glog:test",
+        ":test",
     ],
 
     visibility = [

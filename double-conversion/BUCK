@@ -12,7 +12,7 @@ cxx_library(
     ]),
 
     tests = [
-        "//double-conversion:test",
+        ":test",
     ],
 
     visibility = [

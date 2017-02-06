@@ -15,7 +15,7 @@ cxx_library(
     ]),
 
     tests = [
-        "//gflags:test",
+        ":test",
     ],
 
     visibility = [

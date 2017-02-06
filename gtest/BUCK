@@ -52,7 +52,7 @@ cxx_library(
     ]),
 
     tests = [
-        "//gtest:test",
+        ":test",
     ],
 
     # make the exported_headers publicly available
