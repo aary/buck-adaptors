@@ -11,7 +11,21 @@ cxx_library(
         ("double-conversion", "double-conversion/*.h"),
     ]),
 
+    tests = [
+        "//double-conversion:test",
+    ],
+
     visibility = [
         "PUBLIC",
+    ],
+)
+
+cxx_test(
+    name = "test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [    
+        "//double-conversion:double-conversion",
     ],
 )
