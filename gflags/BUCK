@@ -14,10 +14,6 @@ cxx_library(
         "**/*config*.h",
     ]),
 
-    tests = [
-        ":test",
-    ],
-
     visibility = [
         "PUBLIC",
     ],
@@ -29,6 +25,6 @@ cxx_test(
         "test.cpp",
     ],
     deps = [
-        "//gflags:gflags",
+        ":gflags",
     ],
 )
