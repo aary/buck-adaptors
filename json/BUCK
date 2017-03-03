@@ -9,3 +9,13 @@ cxx_library(
         "PUBLIC",
     ],
 )
+
+cxx_test(
+    name = "test",
+    deps = [
+        ":json",
+    ],
+    srcs = [
+        "test.cpp",
+    ],
+)
