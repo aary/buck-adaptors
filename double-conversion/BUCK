@@ -10,11 +10,6 @@ cxx_library(
     exported_headers = subdir_glob([
         ("double-conversion", "double-conversion/*.h"),
     ]),
-
-    tests = [
-        ":test",
-    ],
-
     visibility = [
         "PUBLIC",
     ],
@@ -25,7 +20,7 @@ cxx_test(
     srcs = [
         "test.cpp",
     ],
-    deps = [    
-        "//double-conversion:double-conversion",
+    deps = [
+        ":double-conversion",
     ],
 )
