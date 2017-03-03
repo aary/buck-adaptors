@@ -9,3 +9,13 @@ prebuilt_cxx_library(
         "PUBLIC",
     ],
 )
+
+cxx_test(
+    name = "test",
+    deps = [
+        ":jemalloc",
+    ],
+    srcs = [
+        "test.cpp",
+    ],
+)
