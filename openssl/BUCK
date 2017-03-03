@@ -9,7 +9,7 @@ prebuilt_cxx_library_group(
         "openssl/lib/libssl.a",
     ],
     exported_deps = [
-        "//openssl:openssl-headers",
+        ":openssl-headers",
     ],
 
     visibility = [
