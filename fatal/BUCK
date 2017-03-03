@@ -8,10 +8,6 @@ cxx_library(
         ("fatal", "**/*.h"),
     ]),
 
-    tests = [
-        ":test",
-    ],
-
     visibility = [
         "PUBLIC",
     ],
@@ -22,7 +18,7 @@ cxx_test(
     srcs = [
         "test.cpp",
     ],
-    deps = [    
+    deps = [
         ":fatal",
     ],
 )
