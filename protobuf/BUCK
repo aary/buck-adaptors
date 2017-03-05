@@ -1,0 +1,30 @@
+cxx_library(
+    name = "protobuf",
+    header_namespace = "",
+    preprocessor_flags = [
+        "-DHAVE_PTHREAD",
+    ],
+    srcs = glob([
+        "protobuf/src/**/*.cc",
+    ], excludes = [
+        "**/*test*.cc",
+        "**/compiler/**/*.cc",
+    ]),
+    exported_headers = subdir_glob([
+        ("protobuf/src", "**/*.h"),
+    ]),
+)
+
+cxx_binary(
+    name = "test",
+    deps = [
+        ":protobuf",
+    ],
+    srcs = [
+        "test.cpp",
+        "tutorial.pb.cc",
+    ],
+    headers = [
+        "tutorial.pb.h",
+    ],
+)
