@@ -1,0 +1,27 @@
+prebuilt_cxx_library(
+    name = "tbb",
+    lib_dir = "tbb/build/tbb_release",
+    header_namespace = "",
+    exported_headers = subdir_glob([
+        ("tbb/include", "**/*.h"),
+    ]),
+    exported_linker_flags = [
+        "-ldl",
+    ],
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_test(
+    name = "test",
+    deps = [
+        ":tbb",
+    ],
+    srcs = [
+        "test.cpp",
+    ],
+    visibility = [
+        "PUBLIC",
+    ],
+)
