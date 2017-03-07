@@ -23,8 +23,4 @@ cxx_library(
     exported_headers = subdir_glob([
         ("openssl/include", "**/*.h"),
     ]),
-
-    visibility = [
-        "PUBLIC",
-    ],
 )
