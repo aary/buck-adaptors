@@ -342,6 +342,6 @@ cxx_test(
         "test.cpp",
     ],
     deps = [
-        "//boost:boost",
+        ":boost",
     ],
 )
