@@ -1,0 +1,25 @@
+cxx_library(
+    name = "msgpack",
+    header_namespace = "",
+    srcs = glob([
+        "msgpack/src/**/*.c",
+        "msgpack/src/**/*.cpp",
+    ]),
+    exported_headers = subdir_glob([
+        ("msgpack/include", "**/*.hpp"),
+        ("msgpack/include", "**/*.h"),
+    ]),
+    visibility = [
+        "PUBLIC",
+    ],
+)
+
+cxx_test(
+    name = "test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [
+        ":msgpack",
+    ],
+)
