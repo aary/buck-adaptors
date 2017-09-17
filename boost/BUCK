@@ -7,20 +7,12 @@ cxx_library(
     # can be included in the library when this is included as a dependency
     exported_deps = [
         "//boost:boost_headers",
+        # "//boost:atomic",
         "//boost:chrono",
         "//boost:context",
-        "//boost:filesystem",
-        "//boost:iostreams",
-        "//boost:log",
-        "//boost:program_options",
-        "//boost:python",
-        "//boost:regex",
-        "//boost:serialization",
-        "//boost:signals",
+        "//boost:coroutine",
         "//boost:system",
         "//boost:thread",
-        "//boost:timer",
-        "//boost:wave",
     ],
 
     visibility = [
@@ -45,20 +37,102 @@ cxx_library(
     ],
 )
 
+# All the libraries in boost that involve building should be built as
+# prebuilt_cxx_libraries
+# prebuilt_cxx_library(
+    # name = "boost_atomic",
+    # lib_dir = "boost/stage/lib",
+# )
+prebuilt_cxx_library(
+    name = "boost_chrono",
+    lib_dir = "boost/stage/lib",
+)
+# This does not build properly yet
+# prebuilt_cxx_library(
+#     name = "boost_container",
+#     lib_dir = "boost/stage/lib",
+# )
+prebuilt_cxx_library(
+    name = "boost_context",
+    lib_dir = "boost/stage/lib",
+)
+prebuilt_cxx_library(
+    name = "boost_coroutine",
+    lib_dir = "boost/stage/lib",
+)
+# prebuilt_cxx_library(
+    # name = "boost_date_time",
+    # lib_dir = "boost/stage/lib",
+# )
+# prebuilt_cxx_library(
+    # name = "boost_exception",
+    # lib_dir = "boost/stage/lib",
+# )
+# prebuilt_cxx_library(
+    # name = "boost_fiber",
+    # lib_dir = "boost/stage/lib",
+# )
+# prebuilt_cxx_library(
+    # name = "boost_filesystem",
+    # lib_dir = "boost/stage/lib",
+# )
+# prebuilt_cxx_library(
+    # name = "boost_graph",
+    # lib_dir = "boost/stage/lib",
+# )
+prebuilt_cxx_library(
+    name = "boost_system",
+    lib_dir = "boost/stage/lib",
+)
+prebuilt_cxx_library(
+    name = "boost_thread",
+    lib_dir = "boost/stage/lib",
+)
+
+# cxx_library(
+    # name = "atomic",
+    # header_namespace = "",
+    # deps = [
+        # "//boost:boost_headers",
+    # ],
+    # exported_deps = [
+        # ":boost_atomic",
+    # ],
+
+    # visibility = [
+        # "PUBLIC",
+    # ],
+# )
+
 cxx_library(
     name = "chrono",
     header_namespace = "",
     deps = [
         "//boost:boost_headers",
     ],
-    srcs = glob([
-        "boost/libs/chrono/src/**/*.cpp",
-    ]),
+    exported_deps = [
+        ":boost_chrono",
+    ],
 
     visibility = [
         "PUBLIC",
     ],
 )
+
+# cxx_library(
+#     name = "container",
+#     header_namespace = "",
+#     deps = [
+#         "//boost:boost_headers",
+#     ],
+#     exported_deps = [
+#         ":boost_container",
+#     ],
+#
+#     visibility = [
+#         "PUBLIC",
+#     ],
+# )
 
 cxx_library(
     name = "context",
@@ -66,38 +140,8 @@ cxx_library(
     deps = [
         "//boost:boost_headers",
     ],
-    srcs = glob([
-        "boost/libs/context/src/**/*.cpp",
-    ], excludes = [
-        "boost/libs/context/src/windows/*.cpp",
-        "boost/libs/context/src/unsupported.cpp",
-        "boost/libs/context/src/untested.cpp",
-    ]),
-
-    visibility = [
-        "PUBLIC",
-    ],
-)
-
-cxx_library(
-    name = "filesystem",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    srcs = glob([
-        "boost/libs/filesystem/src/**/*.cpp",
-    ]),
-
-    # When compiling a Boost.Filesystem, there is a warning about comparing
-    # the address of a reference (reference to a statically created variable
-    # within a function) to boolean truth, this is done because the variable
-    # is passed in as a pointer and the author thought it would be nice to
-    # assert to make sure its always true.  The C++ compiler complains about
-    # this as it is not needed, but it's not wrong; and it's not undefined
-    # behavior, so suppress the warning
-    compiler_flags = [
-        "-Wno-undefined-bool-conversion",
+    exported_deps = [
+        ":boost_context",
     ],
 
     visibility = [
@@ -106,113 +150,13 @@ cxx_library(
 )
 
 cxx_library(
-    name = "iostreams",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-        "//zlib:zlib",
-        "//bzip2:bzip2",
-    ],
-    srcs = glob([
-        "boost/libs/iostreams/src/**/*.cpp",
-    ]),
-
-    visibility = [
-        "PUBLIC",
-    ],
-)
-
-cxx_library(
-    name = "locale",
+    name = "coroutine",
     header_namespace = "",
     deps = [
         "//boost:boost_headers",
     ],
-    srcs = glob([
-        "boost/libs/locale/src/**/*.cpp",
-    ], excludes = [
-        "boost/libs/locale/src/win32/**/*.cpp",
-    ]),
-
-    visibility = [
-        "PUBLIC",
-    ],
-)
-
-cxx_library(
-    name = "log",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    headers = subdir_glob([
-        ("boost/libs/log/src", "**/*.hpp"),
-    ]),
-    srcs = glob([
-        "boost/libs/log/src/**/*.cpp",
-    ], excludes = [
-        "boost/libs/log/src/windows/**/*.cpp",
-        "boost/libs/log/src/dump_avx2.cpp",
-    ]),
-
-    visibility = [
-        "PUBLIC",
-    ],
-)
-
-cxx_library(
-    name = "mpi",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    headers = subdir_glob([
-        ("boost/libs/mpi/src", "**/*.hpp"),
-    ]),
-    srcs = glob([
-        "boost/libs/mpi/src/**/*.cpp",
-    ]),
-
-    visibility = [
-        "PUBLIC",
-    ],
-)
-
-
-cxx_library(
-    name = "program_options",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    srcs = glob([
-        "boost/libs/program_options/src/*.cpp",
-    ]),
-
-    visibility = [
-        "PUBLIC",
-    ],
-)
-
-cxx_library(
-    name = "python",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    headers = subdir_glob([
-        ("python2.7", "**/*.h"),
-    ]),
-    srcs = glob([
-        "boost/libs/python/src/*.cpp",
-    ]),
-
-    # There are lots of warnings generated by -Wparentheses-equality when
-    # compiling Boost.Python, the official 1.63 release contains extra
-    # parentheses around expressions.  Although this is well defined C++ code,
-    # it generates ugly warnings, so suppress them
-    compiler_flags = [
-        "-Wno-parentheses-equality",
+    exported_deps = [
+        ":boost_coroutine",
     ],
 
     visibility = [
@@ -220,66 +164,94 @@ cxx_library(
     ],
 )
 
-cxx_library(
-    name = "regex",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    srcs = glob([
-        "boost/libs/regex/src/**/*.cpp",
-    ]),
+# cxx_library(
+    # name = "date_time",
+    # header_namespace = "",
+    # deps = [
+        # "//boost:boost_headers",
+    # ],
+    # exported_deps = [
+        # ":boost_date_time",
+    # ],
 
-    visibility = [
-        "PUBLIC",
-    ],
-)
+    # visibility = [
+        # "PUBLIC",
+    # ],
+# )
 
-cxx_library(
-    name = "serialization",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    srcs = glob([
-        "boost/libs/serialization/src/**/*.cpp",
-    ]),
+# cxx_library(
+    # name = "exception",
+    # header_namespace = "",
+    # deps = [
+        # "//boost:boost_headers",
+    # ],
+    # exported_deps = [
+        # ":boost_exception",
+    # ],
 
-    visibility = [
-        "PUBLIC",
-    ],
-)
+    # visibility = [
+        # "PUBLIC",
+    # ],
+# )
 
-cxx_library(
-    name = "signals",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    srcs = glob([
-        "boost/libs/signals/src/**/*.cpp",
-    ]),
+# cxx_library(
+    # name = "fiber",
+    # header_namespace = "",
+    # deps = [
+        # "//boost:boost_headers",
+    # ],
+    # exported_deps = [
+        # ":boost_fiber",
+    # ],
 
-    visibility = [
-        "PUBLIC",
-    ],
-)
+    # visibility = [
+        # "PUBLIC",
+    # ],
+# )
 
+# cxx_library(
+    # name = "filesystem",
+    # header_namespace = "",
+    # deps = [
+        # "//boost:boost_headers",
+    # ],
+    # exported_deps = [
+        # ":boost_filesystem",
+    # ],
+
+    # visibility = [
+        # "PUBLIC",
+    # ],
+# )
+
+# cxx_library(
+    # name = "graph",
+    # header_namespace = "",
+    # deps = [
+        # "//boost:boost_headers",
+    # ],
+    # exported_deps = [
+        # ":boost_graph",
+    # ],
+
+    # visibility = [
+        # "PUBLIC",
+    # ],
+# )
 cxx_library(
     name = "system",
     header_namespace = "",
     deps = [
         "//boost:boost_headers",
     ],
-    srcs = glob([
-        "boost/libs/system/src/**/*.cpp",
-    ]),
+    exported_deps = [
+        ":boost_system",
+    ],
 
     visibility = [
         "PUBLIC",
     ],
 )
-
 
 cxx_library(
     name = "thread",
@@ -287,48 +259,8 @@ cxx_library(
     deps = [
         "//boost:boost_headers",
     ],
-    srcs = glob([
-        "boost/libs/thread/src/**/*.cpp",
-    ], excludes = [
-        "boost/libs/thread/src/win32/**/*.cpp",
-    ]),
-
-    visibility = [
-        "PUBLIC",
-    ],
-)
-
-cxx_library(
-    name = "timer",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    srcs = glob([
-        "boost/libs/timer/src/**/*.cpp",
-    ]),
-
-    visibility = [
-        "PUBLIC",
-    ],
-)
-
-cxx_library(
-    name = "wave",
-    header_namespace = "",
-    deps = [
-        "//boost:boost_headers",
-    ],
-    srcs = glob([
-        "boost/libs/wave/src/**/*.cpp",
-    ]),
-
-    # There are lots of warnings generated by -Wparentheses-equality when
-    # compiling Boost.Wave, the official 1.63 release contains extra
-    # parentheses around expressions.  Although this is well defined C++ code,
-    # it generates ugly warnings, so suppress them
-    compiler_flags = [
-        "-Wno-parentheses-equality",
+    exported_deps = [
+        ":boost_thread",
     ],
 
     visibility = [
