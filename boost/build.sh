@@ -6,4 +6,4 @@ rm boost_1_65_1.tar.gz
 cd boost
 ./bootstrap.sh
 mkdir build
-./b2 --prefix=build --with-chrono --with-context --with-coroutine --with-system --with-thread
+./b2 --prefix=build --with-chrono --with-context --with-coroutine --with-system --with-regex --with-thread
