@@ -2,3 +2,4 @@ buck-out
 .buckd
 boost/python2.7
 openssl/openssl
+*tar.gz
